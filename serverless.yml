@@ -1,0 +1,28 @@
+org: hsmtkk
+app: bookish-adventure
+service: bookish-adventure
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: us-west-2
+  runtime: python3.9
+
+plugins:
+  - serverless-python-requirements
+
+functions:
+  hello:
+    handler: handler.handler
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+
+custom:
+  pythonRequirements:
+    layer: true
+
+package:
+  exclude:
+    - .git/**
+    - .venv/**
